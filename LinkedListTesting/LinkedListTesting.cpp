@@ -1,16 +1,17 @@
 // LinkedListTesting.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 #include <iostream>
+#include <string>
 using namespace std;
 
 // A linked list node
 struct Node
 {
-    int data;
+    string *data;
     struct Node* next;
 };
 //insert a new node in front of the list
-void push(struct Node** head, int node_data)
+void push(struct Node** head, string* node_data)
 {
     /* 1. create and allocate node */
     struct Node* newNode = new Node;
@@ -26,7 +27,7 @@ void push(struct Node** head, int node_data)
 }
 
 //insert new node after a given node
-void insertAfter(struct Node* prev_node, int node_data)
+void insertAfter(struct Node* prev_node, string* node_data)
 {
     /*1. check if the given prev_node is NULL */
     if (prev_node == NULL)
@@ -47,8 +48,8 @@ void insertAfter(struct Node* prev_node, int node_data)
     prev_node->next = newNode;
 }
 
-/* insert new node at the end of the linked list */
-void append(struct Node** head, int node_data)
+/* insert new node at the end of the linked list------------------------------------This is the important one for our needs*/
+void append(struct Node** head, string* node_data)
 {
     /* 1. create and allocate node */
     struct Node* newNode = new Node;
@@ -57,6 +58,7 @@ void append(struct Node** head, int node_data)
 
     /* 2. assign data to the node */
     newNode->data = node_data;
+    
 
     /* 3. set next pointer of new node to null as its the last node*/
     newNode->next = NULL;
@@ -83,7 +85,7 @@ void displayList(struct Node* node)
     //traverse the list to display each node
     while (node != NULL)
     {
-        cout << node->data << "-->";
+        cout << *(node->data) << "-->"; //USING THE *( ) I MANAGED TO GET IT TO OUTPUT THE DATA INSTEAD OF THE POINTER
         node = node->next;
     }
 
@@ -97,11 +99,19 @@ int main()
     struct Node* head = NULL;
 
     // Insert 10.
-    append(&head, 10);
-    append(&head, 20);
-    append(&head, 30);
-    append(&head, 40);
-    append(&head, 50);
+
+    string thing = "tjomg";
+    string* point = &thing;
+    cout << *point<<endl;
+    append(&head, point);
+    append(&head, &thing);
+    append(&head, &thing);
+    append(&head, &thing);
+    append(&head, &thing);
+
+
+
+
 
 
     /*
